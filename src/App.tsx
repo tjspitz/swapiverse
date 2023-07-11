@@ -1,18 +1,56 @@
-import _ from 'lodash';
 import { useState, useEffect } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { Planet } from '../types';
-import { fetchPlanet,  } from './api';
+import { getTourInfo  } from './api';
+// import { TourInfo } from './types';
+import Pilots from './components/Pilots';
+import Planets from './components/Planets';
+
+const defaultChoices = {
+  pilot: false,
+  starship: false,
+  planet: 'Tatooine',
+  traveling: false,
+}
+
+const defaultInfo = {
+  name: '',
+  population: '',
+  climate: '',
+  terrain: '',
+  residents: [
+    {
+      name: '',
+      starships: [
+        {
+          name: '',
+          model: '',
+          starship_class: '',
+          passengers: '',
+        },
+      ],
+    },
+  ],
+};
 
 function App() {
-  const [planets, setPlanets] = useState<{} | Planet>({});
-  const [starships, setStarships] = useState<[] | string[][]>([]);
+  const [tourInfo, setTourInfo] = useState(defaultInfo);
+  const [choices, setChoices] = useState(defaultChoices);
 
   useEffect(() => {
-    fetchPlanet()
-      .then((planet) => setPlanets(planet || {}))
+    getTourInfo(choices.planet || 'Tatooine')
+      .then((details) => setTourInfo(details))
       .catch((err) => console.error(err));
-  }, []);
+  }, [choices.traveling]);
+
+  const handlePilotClick = () => {
+
+  };
+
+  const handleTravelClick = () => {
+
+  };
+
+  const { name: planetName, population, climate, terrain } = tourInfo;
 
   return (
     <>
@@ -29,7 +67,12 @@ function App() {
       </Navbar>
 
       <Container>
-        <h1>{`Welcome to ${'to-do'}, traveler!`}</h1>
+        <h1>Welcome to {planetName}, travler!</h1>
+        <p>
+          We hope you enjoy your stay amongst {planetName}'s {population} residents, but if you find the {climate} climate or {terrain} terrain not to your liking, feel free to hire one of our fantastic pilots. They'll whisk you away to your next destination!
+        </p>
+        <Pilots tourInfo={tourInfo} />
+        <Planets />
       </Container>
 
       <footer className="bg-light py-3">

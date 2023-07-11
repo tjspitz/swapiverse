@@ -1,24 +1,41 @@
 import _ from 'lodash';
-import SWApi, { Planets, Starships } from './swapi';
-import { Planet } from '../types';
+import SWApi, { Planets, IPlanet } from './swapi';
+import { TourInfo } from './types';
 
-export const fetchPlanet = (): Promise<void | Planet> => {
-  return Planets.find((planet) => planet.name === 'Tatooine')
+export const getPlanets = (): Promise<void | any> => {
+  return Planets.find()
+    .then((planets) => {
+      console.log(planets);
+      return planets;
+    })
+    .catch((err) => console.error(err));
+};
+
+export const getTourInfo = (newPlanet?: string): Promise<any> => {
+  return Planets.find((planet) => planet.name === newPlanet)
   .then((planets) => planets.populateAll('residents'))
+  .then((planets) => planets.populateAll('residents.starships'))
   .then((planets) =>
     _.map(planets.resources, (planet) => ({
       name: planet.value.name,
       population: planet.value.population,
       climate: planet.value.climate,
       terrain: planet.value.terrain,
-      residents: planet.value.residents,
-      // residents: _.map(planet.value.residents as SWApi.IPeople[], 'name'),
+      residents: _.map(planet.value.residents as SWApi.IPeople[], (resident) => ({
+        name: resident.name,
+        starships: _.map(resident.starships as SWApi.IStarship[], (starship) => ({
+          name: starship.name,
+          model: starship.model,
+          starship_class: starship.starship_class,
+          passengers: starship.passengers,
+        }))
+      })),
 
     }))
   )
   .then((planets) => planets[0])
   .catch((err) => {
-    console.error(err)
+    console.error(err);
   });
 };
 
