@@ -1,24 +1,29 @@
 import { useState } from 'react';
-import { Carousel, Button } from 'react-bootstrap';
+import { Card, Carousel, Button } from 'react-bootstrap';
+import { Residents } from '../types';
 
 function Pilots({
-  info,
+  pilots,
+  escapePlanet,
   setStarshipPilot,
   showPilots,
   setShowPilots,
   showStarships,
   setShowStarships,
   handleEscapeClick,
+  styles,
 }: {
-  info: any;
-  setStarshipPilot: any;
-  showPilots: any;
-  setShowPilots: any;
-  showStarships: any;
-  setShowStarships: any;
-  handleEscapeClick: any;
+  pilots: Residents;
+  escapePlanet: string;
+  setStarshipPilot: React.Dispatch<React.SetStateAction<string>>;
+  showPilots: boolean;
+  setShowPilots: React.Dispatch<React.SetStateAction<boolean>>;
+  showStarships: boolean;
+  setShowStarships: React.Dispatch<React.SetStateAction<boolean>>;
+  handleEscapeClick: () => void;
+  styles: any;
 }) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState<number>(0);
 
   const handleArrowClick = (selectedIndex: number) => {
     setIndex(selectedIndex);
@@ -30,20 +35,6 @@ function Pilots({
     setShowStarships(!showStarships);
   };
 
-  const styles = {
-    carousel: {
-      padding: '1rem',
-    },
-    carouselItem: {
-      padding: '2rem',
-      background: '#373940',
-      borderRadius: '2rem',
-    },
-    carouselCaption: {
-      padding: '0.5rem',
-    },
-  };
-
   return (
     <>
       <h1>Choose your pilot!</h1>
@@ -51,15 +42,15 @@ function Pilots({
         We're sorry to see you go! The following residents are available with a
         variety of ships to whisk you away to your next destination...
       </p>
-      {!info.length && (
+      {!pilots.length && (
         <>
           <h3>Oh noes!</h3>
           <p>
             You've traveled to a planet devoid of available pilots. No worries,
-            though, you can surely find some pilots on Tatooine.
+            though, you can magically backtrack to {escapePlanet} and try again.
           </p>
           <Button variant="warning" onClick={handleEscapeClick}>
-            Take me back to Tatooine
+            Take me back to {escapePlanet}...
           </Button>
         </>
       )}
@@ -70,21 +61,26 @@ function Pilots({
         touch={true}
         interval={null}
       >
-        {info.map((pilot: any, i: number) => (
+        {pilots.map((pilot: any, i: number) => (
           <Carousel.Item
             key={pilot.pilotName + (i + 1)}
             onClick={handlePilotClick}
             style={styles.carouselItem}
           >
-            <img
-              className="d-block w-100"
-              src="http://localhost:3000/swRebel.png"
-              // src="%PUBLIC_URL%/swRebel.png"
-              alt={pilot.pilotName}
-            />
-            <Carousel.Caption style={styles.carouselCaption}>
-              <h3>{pilot.pilotName}</h3>
-            </Carousel.Caption>
+            <Card>
+              <Card.Img
+                variant="top"
+                src="http://localhost:3000/personPlaceholder.png"
+                // src="%PUBLIC_URL%/personPlaceholder.png"
+                alt={pilot.pilotName}
+                style={styles.cardImg}
+              />
+              <Card.Body>
+                <Card.Title style={styles.cardTitle}>
+                  {pilot.pilotName}
+                </Card.Title>
+              </Card.Body>
+            </Card>
           </Carousel.Item>
         ))}
       </Carousel>

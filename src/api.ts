@@ -7,6 +7,10 @@ export const getPlanets = (): Promise<any> => {
     .then((planets) =>
       _.map(planets.resources, (planet) => ({
         planetName: planet.value.name,
+        population: planet.value.population,
+        climate: planet.value.climate,
+        terrain: planet.value.terrain,
+        totalResidents: planet.value.residents.length,
       }))
     )
     .catch((err) => console.error(err));

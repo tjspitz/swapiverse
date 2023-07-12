@@ -7,3 +7,10 @@ export type TourInfo =
       starships: Array< Pick< IStarship, 'name' | 'model' | 'starship_class' | 'passengers' >>;
     }>
   };
+
+  export type Residents =
+  Array<{
+    name: string;
+    starships: Array< Pick< IStarship, 'name' | 'model' | 'starship_class' | 'passengers' >>;
+  }>;
+  

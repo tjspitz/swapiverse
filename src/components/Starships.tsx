@@ -1,22 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Carousel } from 'react-bootstrap';
+import { useState } from 'react';
+import { Card, Carousel } from 'react-bootstrap';
 
 function Starships({
-  info,
+  pilots,
   starshipPilot,
   showStarships,
   setShowStarships,
   showPlanets,
   setShowPlanets,
+  styles,
 }: {
-  info: any;
-  starshipPilot: any;
-  showStarships: any;
-  setShowStarships: any;
-  showPlanets: any;
-  setShowPlanets: any;
+  pilots: any;
+  starshipPilot: string;
+  showStarships: boolean;
+  setShowStarships: React.Dispatch<React.SetStateAction<boolean>>;
+  showPlanets: boolean;
+  setShowPlanets: React.Dispatch<React.SetStateAction<boolean>>;
+  styles: any;
 }) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState<number>(0);
 
   const handleArrowClick = (selectedIndex: number) => {
     setIndex(selectedIndex);
@@ -27,23 +29,9 @@ function Starships({
     setShowPlanets(!showPlanets);
   };
 
-  const pilot = info.filter(
+  const pilot = pilots.filter(
     (pilot: any) => pilot.pilotName === starshipPilot
   )[0];
-
-  const styles = {
-    carousel: {
-      padding: '1rem',
-    },
-    carouselItem: {
-      padding: '2rem',
-      background: '#373940',
-      borderRadius: '2rem',
-    },
-    carouselCaption: {
-      padding: '0.5rem',
-    },
-  };
 
   return (
     <>
@@ -66,17 +54,23 @@ function Starships({
               onClick={handleStarshipClick}
               style={styles.carouselItem}
             >
-              <img
-                className="d-block w-100"
-                src="http://localhost:3000/logo192.png"
-                // src="%PUBLIC_URL%/logo192.png"
-                alt={pilot.starships.starshipName}
-              />
-              <Carousel.Caption style={styles.carouselCaption}>
-                <h3>Ship: {ship.starshipName}</h3>
-                <p>Model: {ship.model}</p>
-                <p>Class: {ship.starshipClass}</p>
-              </Carousel.Caption>
+              <Card>
+                <Card.Img
+                  variant="top"
+                  src="http://localhost:3000/starshipPlaceholder.png"
+                  // src="%PUBLIC_URL%/starshipPlaceholder.png"
+                  alt={pilot.starships.starshipName}
+                  style={styles.cardImg}
+                />
+                <Card.Body>
+                  <Card.Title style={styles.cardTitle}>
+                    {ship.starshipName}
+                  </Card.Title>
+                  <Card.Text style={{ textAlign: 'center' }}>
+                    {ship.model} class {ship.starshipClass}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
             </Carousel.Item>
           );
         })}

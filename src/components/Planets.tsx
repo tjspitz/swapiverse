@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Card, Carousel, ListGroup } from 'react-bootstrap';
 import { getPlanets } from '../api';
 
 function Planets({
   startPlanet,
   handleTravelClick,
+  styles,
 }: {
-  startPlanet: any;
-  handleTravelClick: any;
+  startPlanet: string;
+  handleTravelClick: (e: any) => void;
+  styles: any;
 }) {
   const [planets, setPlanets] = useState([]);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
     getPlanets()
@@ -20,20 +22,6 @@ function Planets({
 
   const handleArrowClick = (selectedIndex: number) => {
     setIndex(selectedIndex);
-  };
-
-  const styles = {
-    carousel: {
-      padding: '1rem',
-    },
-    carouselItem: {
-      padding: '2rem',
-      background: '#373940',
-      borderRadius: '2rem',
-    },
-    carouselCaption: {
-      padding: '0.5rem',
-    },
   };
 
   return (
@@ -50,24 +38,43 @@ function Planets({
         {planets
           .filter((planet: any) => planet.planetName !== startPlanet)
           .map((planet: any, i: number) => {
-          return (
-            <Carousel.Item
-              key={planet.planetName + (i + 1)}
-              onClick={handleTravelClick}
-              style={styles.carouselItem}
-            >
-              <img
-                className="d-block w-100"
-                src="http://localhost:3000/logo192.png"
-                // src="%PUBLIC_URL%/logo192.png"
-                alt={planet.planetName}
-              />
-              <Carousel.Caption style={styles.carouselCaption}>
-                <p>{planet.planetName}</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          );
-        })}
+            return (
+              <Carousel.Item
+                key={planet.planetName + (i + 1)}
+                onClick={handleTravelClick}
+                style={styles.carouselItem}
+              >
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src="http://localhost:3000/planetPlaceholder.png"
+                    // src="%PUBLIC_URL%/planetPlaceholder.png"
+                    alt={planet.planetName}
+                    style={styles.cardImg}
+                  />
+                  <Card.Body>
+                    <Card.Title style={styles.cardTitle}>
+                      {planet.planetName}
+                    </Card.Title>
+                    <ListGroup className="list-group-flush">
+                      <ListGroup.Item>
+                        Population: {planet.population}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Climate: {planet.climate}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Terrain: {planet.terrain}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Known residents: {planet.totalResidents}
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </Card.Body>
+                </Card>
+              </Carousel.Item>
+            );
+          })}
       </Carousel>
     </>
   );
