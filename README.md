@@ -24,15 +24,18 @@ npm start
 ```
 
 #### Odds & Ends
-My goal was to make a fun, basic "travel" game.
-Due the SWAPI's propensity for having tons of planets with no "residents", I recommend 
+- My goal was to make a fun, basic "travel" game.
+- Due the SWAPI's propensity for having tons of planets with no "residents", I recommend 
 getting a feel for the app by selecting Naboo as your first destination. 
-After that, choose any you wish. Often, you will be redirected back to your origin planet since most SWAPI planets
-do not have any "residents" that are associated with Starships.
-However, I still like the concept, and it would be much more fun if the plethora of planets all had resident-starship associations.
-</br>
+After that, choose any you wish. 
+- Often, you will be redirected back to your origin planet since most SWAPI planets
+do not have any "residents" that are associated with Starships. 
+- Please also note the "placeholder" images on each carousel as representative of each carousel card (not entirely accurate), 
+as SWAPI unfortunately does not provide image data for its various resources.
+- That said, I still like the concept, and it would be much more fun if the plethora of planets all had resident-starship associations.
+<hr>
 The original README can be seen below, if you comment it back in via your editor.
-
+<br>
 <!--
 # Inception Health React Coding Challenge
 
