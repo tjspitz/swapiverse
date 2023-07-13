@@ -16,7 +16,7 @@ function Welcome({
 
   return (
     <>
-      <h1>Welcome to {planet}, travler!</h1>
+      <h1>Welcome to {planet}, traveler!</h1>
       <img
         className="d-block w-100 my-4"
         src="http://localhost:3000/planetPlaceholder.png"
