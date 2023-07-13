@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, Carousel, ListGroup } from 'react-bootstrap';
 import { getPlanets } from '../api';
-import { AllPlanets } from '../types';
+import { AllPlanets, CustomStyles } from '../types';
 
 function Planets({
   startPlanet,
@@ -10,7 +10,7 @@ function Planets({
 }: {
   startPlanet: string;
   handleTravelClick: (e: any) => void;
-  styles: any;
+  styles: CustomStyles;
 }) {
   const [planets, setPlanets] = useState<AllPlanets>([]);
   const [index, setIndex] = useState<number>(0);

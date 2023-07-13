@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Card, Carousel } from 'react-bootstrap';
+import { CustomStyles } from '../types';
 
 function Starships({
   pilots,
@@ -16,7 +17,7 @@ function Starships({
   setShowStarships: React.Dispatch<React.SetStateAction<boolean>>;
   showPlanets: boolean;
   setShowPlanets: React.Dispatch<React.SetStateAction<boolean>>;
-  styles: any;
+  styles: CustomStyles;
 }) {
   const [index, setIndex] = useState<number>(0);
 

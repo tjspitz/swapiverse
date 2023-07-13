@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { getTourInfo } from './api';
-import { TourInfo } from './types';
+import { CustomStyles, TourInfo } from './types';
 import Welcome from './components/Welcome';
 import Pilots from './components/Pilots';
 import Starships from './components/Starships';
@@ -27,7 +27,7 @@ const defaultInfo: TourInfo = {
   ],
 };
 
-const styles = {
+const styles: CustomStyles = {
   carousel: {
     padding: '1rem',
   },

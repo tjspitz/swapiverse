@@ -6,16 +6,16 @@ export type TourInfo =
     residents: Residents;
   };
 
-  export type Residents =
-    Array<{
-      pilotName: string;
-      starships: Array<
-        Pick< IStarship, 'model' | 'passengers' > & {
-          starshipName: string;
-          starshipClass: string;
-        }
-      >;
-    }>;
+export type Residents =
+  Array<{
+    pilotName: string;
+    starships: Array<
+      Pick< IStarship, 'model' | 'passengers' > & {
+        starshipName: string;
+        starshipClass: string;
+      }
+    >;
+  }>;
 
 export type AllPlanets =
   Array<
@@ -23,3 +23,11 @@ export type AllPlanets =
       planetName: string;
       totalResidents: number;
   }>;
+
+export type CustomStyles = {
+  readonly carousel: { readonly [index: string]: string; };
+  readonly carouselItem: { readonly [index: string]: string; };
+  readonly cardImg: { readonly [index: string]: string; };
+  readonly cardTitle: { readonly [index: string]: string; };
+  readonly cardText: { readonly [index: string]: string; };
+};

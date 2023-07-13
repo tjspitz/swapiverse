@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Card, Carousel, Button } from 'react-bootstrap';
-import { Residents } from '../types';
+import { CustomStyles, Residents } from '../types';
 
 function Pilots({
   pilots,
@@ -21,7 +21,7 @@ function Pilots({
   showStarships: boolean;
   setShowStarships: React.Dispatch<React.SetStateAction<boolean>>;
   handleEscapeClick: () => void;
-  styles: any;
+  styles: CustomStyles;
 }) {
   const [index, setIndex] = useState<number>(0);
 
