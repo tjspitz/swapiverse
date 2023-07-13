@@ -8,23 +8,44 @@ import Starships from './components/Starships';
 import Planets from './components/Planets';
 
 const defaultInfo: TourInfo = {
-  name: '',
+  planetName: '',
   population: '',
   climate: '',
   terrain: '',
   residents: [
     {
-      name: '',
+      pilotName: '',
       starships: [
         {
-          name: '',
+          starshipName: '',
           model: '',
-          starship_class: '',
+          starshipClass: '',
           passengers: '',
         },
       ],
     },
   ],
+};
+
+const styles = {
+  carousel: {
+    padding: '1rem',
+  },
+  carouselItem: {
+    padding: '2rem',
+    background: '#373940',
+    borderRadius: '2rem',
+    textAlign: 'left',
+  },
+  cardImg: {
+    padding: '1rem',
+  },
+  cardTitle: {
+    textAlign: 'center',
+  },
+  cardText: {
+    textAlign: 'left',
+  },
 };
 
 function App() {
@@ -56,30 +77,6 @@ function App() {
     setShowStarships(false);
     setShowPlanets(false);
     setTraveling(!traveling);
-  };
-
-  const styles = {
-    background: {
-      backgroundImage: 'url("../public/background.png")',
-    },
-    carousel: {
-      padding: '1rem',
-    },
-    carouselItem: {
-      padding: '2rem',
-      background: '#373940',
-      borderRadius: '2rem',
-      textAlign: 'left',
-    },
-    cardImg: {
-      padding: '1rem',
-    },
-    cardTitle: {
-      textAlign: 'center',
-    },
-    cardText: {
-      textAlign: 'left',
-    }
   };
 
   return (
