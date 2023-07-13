@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import SWApi, { Planets } from './swapi';
-import { TourInfo } from './types';
+import { TourInfo, AllPlanets } from './types';
 
-export const getPlanets = (): Promise<any> => {
+export const getPlanets = (): Promise<AllPlanets> => {
   return Planets.find()
     .then((planets) =>
       _.map(planets.resources, (planet) => ({
@@ -13,10 +13,13 @@ export const getPlanets = (): Promise<any> => {
         totalResidents: planet.value.residents.length,
       }))
     )
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      return [] as AllPlanets;
+    });
 };
 
-export const getTourInfo = (newPlanet: string): Promise<any> => {
+export const getTourInfo = (newPlanet: string): Promise<TourInfo> => {
   return Planets.find((planet) => planet.name === newPlanet)
     .then((planets) => planets.populateAll('residents'))
     .then((planets) => planets.populateAll('residents.starships'))
@@ -44,5 +47,8 @@ export const getTourInfo = (newPlanet: string): Promise<any> => {
       }))
     )
     .then((planets) => planets[0])
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      return {} as TourInfo;
+    });
 };
