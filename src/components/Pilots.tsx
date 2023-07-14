@@ -64,16 +64,15 @@ function Pilots({
         {pilots.map((pilot: any, i: number) => (
           <Carousel.Item
             key={pilot.pilotName + (i + 1)}
-            onClick={handlePilotClick}
             style={styles.carouselItem}
           >
             <Card>
               <Card.Img
                 variant="top"
                 src="http://localhost:3000/personPlaceholder.png"
-                // src="%PUBLIC_URL%/personPlaceholder.png"
                 alt={pilot.pilotName}
                 style={styles.cardImg}
+                onClick={handlePilotClick}
               />
               <Card.Body>
                 <Card.Title style={styles.cardTitle}>

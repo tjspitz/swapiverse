@@ -42,16 +42,15 @@ function Planets({
             return (
               <Carousel.Item
                 key={planet.planetName + (i + 1)}
-                onClick={handleTravelClick}
                 style={styles.carouselItem}
               >
                 <Card>
                   <Card.Img
                     variant="top"
                     src="http://localhost:3000/planetPlaceholder.png"
-                    // src="%PUBLIC_URL%/planetPlaceholder.png"
                     alt={planet.planetName}
                     style={styles.cardImg}
+                    onClick={handleTravelClick}
                   />
                   <Card.Body>
                     <Card.Title style={styles.cardTitle}>

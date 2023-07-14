@@ -52,16 +52,15 @@ function Starships({
           return (
             <Carousel.Item
               key={ship.starshipName + (i + 1)}
-              onClick={handleStarshipClick}
               style={styles.carouselItem}
             >
               <Card>
                 <Card.Img
                   variant="top"
                   src="http://localhost:3000/starshipPlaceholder.png"
-                  // src="%PUBLIC_URL%/starshipPlaceholder.png"
                   alt={pilot.starships.starshipName}
                   style={styles.cardImg}
+                  onClick={handleStarshipClick}
                 />
                 <Card.Body>
                   <Card.Title style={styles.cardTitle}>

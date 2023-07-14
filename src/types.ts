@@ -25,9 +25,9 @@ export type AllPlanets =
   }>;
 
 export type CustomStyles = {
-  readonly carousel: { readonly [index: string]: string; };
-  readonly carouselItem: { readonly [index: string]: string; };
-  readonly cardImg: { readonly [index: string]: string; };
-  readonly cardTitle: { readonly [index: string]: string; };
-  readonly cardText: { readonly [index: string]: string; };
+  readonly carousel: { readonly [index: string]: string | {}; };
+  readonly carouselItem: { readonly [index: string]: string | {}; };
+  readonly cardImg: { readonly [index: string]: string | {}; };
+  readonly cardTitle: { readonly [index: string]: string | {}; };
+  readonly cardText: { readonly [index: string]: string | {}; };
 };
